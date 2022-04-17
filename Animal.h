@@ -67,19 +67,16 @@ class Cage {
 
 	Animal* a;
 	Animal* b;
-	int n;
 
 public:
 	Cage() {
 		a = 0;
 		b = 0;
-		n = 0;
 	}
 
 	void put_cage(Animal* a,  int p);
 	void show();
 
-	int& get_n();
 
 };
 

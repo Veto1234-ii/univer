@@ -1,4 +1,5 @@
 #include "Animal.h"
+#include "Exception.h"
 #include <malloc.h>
 
 void Cage::show() {
@@ -7,18 +8,22 @@ void Cage::show() {
 	else cout << "Клетка пуста"<<endl;
 	
 }
-int& Cage::get_n() {
-	return n;
-}
+
 
 void Cage::put_cage(Animal* _a, int p){
-	if (p == 1) {
+	if (a == 0) {
 		a = _a;
 	}
-	else if (p == 2){
-		b = _a;
+	else {
+		if (b == 0) {
+			if (_a->get_tp() == "herbivorous") {
+				if (a->get_tp() == "herbivorous") b = _a;
+				else throw 1;//хотим подсадить травоядного к хищнику
+			}
+			else throw new Exception_predator();// хищника хотим подсадить к кому-то
+		}
+		else throw 0;// в клетке уже 2 животных
 	}
-	
 	
 }
 
@@ -27,11 +32,7 @@ Zoo::Zoo() {
 }
 
 void Zoo::put_animal(int n, Animal* _a) {
-	if (my_zoo[n].get_n() == 0) {
-		my_zoo[n].put_cage(_a, 1);
-
-	}
-	my_zoo[n].put_cage(_a,  2);
+	
 }
 
 void Zoo::show_cage(int n) {
